@@ -15,3 +15,7 @@
 ```bash
 docker-compose up -d
 ```
+
+### Доступные методы
+GET /api/hello
+POST /api/post_hello
