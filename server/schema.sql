@@ -1,0 +1,15 @@
+DROP TABLE IF EXISTS Employee;
+
+CREATE TABLE Employee (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name VARCHAR(32) NOT NULL,
+    last_name VARCHAR(32) NOT NULL,
+    middle_name VARCHAR(32),
+    uuid VARCHAR(128) NOT NULL UNIQUE
+);
+
+CREATE TABLE timetable (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id FOREIGN KEY (employee_id) REFERENCES Employee (id),
+    time_record DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
