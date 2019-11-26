@@ -2,9 +2,11 @@ from flask import (Blueprint, request, jsonify, make_response, current_app)
 
 api = Blueprint('server', __name__, url_prefix='/api')
 
+
 @api.route('/hello', methods=['GET'])
 def hello():
     return jsonify(result='hello')
+
 
 @api.route('/post_hello', methods=['POST'])
 def post_hello():

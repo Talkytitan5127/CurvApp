@@ -3,5 +3,6 @@
     "MYSQL_DATABASE_PORT": 3306,
     "MYSQL_DATABASE_USER": "rafikov",
     "MYSQL_DATABASE_PASSWORD": "kursach",
-    "MYSQL_DATABASE_DB": "kursach"
+    "MYSQL_DATABASE_DB": "kursach",
+    "SQLALCHEMY_DATABASE_URI": "mysql+pymysql://rafikov:kursach@db:3306/kursach"
 }

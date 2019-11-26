@@ -2,9 +2,8 @@ import os
 import json
 
 from flask import Flask
-from flaskext.mysql import MySQL
+from flask_sqlalchemy import SQLAlchemy
 
-from . import db
 from . import server
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,9 +23,6 @@ app.config.from_mapping(
 )
 config_db(app)
 
-app.mysql = MySQL()
-app.mysql.init_app(app)
-
-db.init_app(app)
+app.mysql = SQLAlchemy(app)
 
 app.register_blueprint(server.api)
