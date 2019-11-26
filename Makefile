@@ -8,5 +8,13 @@ run:
 	docker-compose build
 	docker-compose up -d
 
-connect-db:
-    docker exec -it db mysql -u rafikov -p
+connect_db:
+	docker exec -it db mysql -u rafikov -p
+
+down:
+	docker-compose down
+
+restart:
+	make down
+	make build
+	make up

@@ -4,12 +4,16 @@ import json
 import click
 from flask import Flask
 from flask.cli import with_appcontext
-from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import create_engine
 
 from . import server
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+app = Flask(__name__)
+app.config.from_mapping(
+    DEBUG=True,
+)
 
 def config_db(app_instance):
     with open(f'{BASE_DIR}/config/user_sql.json') as fh:
@@ -18,29 +22,23 @@ def config_db(app_instance):
     for key, value in data.items():
         app_instance.config[key] = value
 
-
-def init_db(app_instance):
-    config_db(app_instance)
-    db = SQLAlchemy(app_instance)
-    db.create_all()
-
-
-app = Flask(__name__)
-app.config.from_mapping(
-    DEBUG=True,
-)
 config_db(app)
 
-app.mysql = SQLAlchemy(app)
+engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'], echo=True)
 
 app.register_blueprint(server.api)
+
+
+def init_db():
+    from .models import Base
+    Base.metadata.create_all(engine)
 
 
 @click.command('init-db')
 @with_appcontext
 def init_db_command():
     """Clear the existing data and create new tables."""
-    init_db(app)
+    init_db()
     click.echo('Initialized the database.')
 
 

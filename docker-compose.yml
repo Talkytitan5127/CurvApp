@@ -29,3 +29,12 @@ services:
       - 5000:80
     depends_on:
       - flask
+  migration:
+    depends_on:
+      - db
+    image: webapp-flask
+    command: sh -c './wait_for.sh db:3306 -- flask init-db'
+    volumes:
+      - .:/app
+    links:
+      - db
