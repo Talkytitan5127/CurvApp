@@ -1,6 +1,6 @@
 from flask import (Blueprint, request, jsonify, make_response, current_app)
 
-api = Blueprint('server', __name__, url_prefix='/api')
+api = Blueprint('api', __name__, url_prefix='/api')
 
 
 @api.route('/hello', methods=['GET'])
