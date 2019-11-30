@@ -5,6 +5,7 @@ import click
 from flask import Flask
 from flask.cli import with_appcontext
 from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
 
 from . import server
 
@@ -15,6 +16,7 @@ app.config.from_mapping(
     DEBUG=True,
 )
 
+
 def config_db(app_instance):
     with open(f'{BASE_DIR}/config/user_sql.json') as fh:
         data = json.load(fh)
@@ -22,9 +24,12 @@ def config_db(app_instance):
     for key, value in data.items():
         app_instance.config[key] = value
 
+
 config_db(app)
 
 engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'], echo=True)
+Session = scoped_session(sessionmaker(bind=engine))
+app.config['session'] = Session
 
 app.register_blueprint(server.api)
 
