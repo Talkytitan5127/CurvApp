@@ -7,7 +7,8 @@ from flask.cli import with_appcontext
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-from . import server
+from . import api
+from . import admin
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -31,7 +32,8 @@ engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'], echo=True)
 Session = scoped_session(sessionmaker(bind=engine))
 app.config['session'] = Session
 
-app.register_blueprint(server.api)
+app.register_blueprint(api.api)
+app.register_blueprint(admin.admin)
 
 
 def init_db():
