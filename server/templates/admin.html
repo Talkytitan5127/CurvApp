@@ -14,5 +14,19 @@
 {% endblock %}
 
 {% block content %}
-<h2>AAAAAAAAAa</h2>
+
+<h1>Список работников</h1>
+{% if users %}
+<ul>
+    {% for user in users %}
+        <li>
+            {% include 'employee.html' %}
+        </li>
+    {% endfor %}
+</ul>
+{% else %}
+    <p>
+        Работников не существует
+    </p>
+{% endif %}
 {% endblock %}

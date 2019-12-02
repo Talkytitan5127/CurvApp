@@ -33,3 +33,7 @@ class Cursor:
     def get_user(self, u_id):
         user = self.session.query(Employee).filter_by(uuid=u_id).first()
         return user
+
+    def get_all_users(self):
+        users = self.session.query(Employee).all()
+        return users
