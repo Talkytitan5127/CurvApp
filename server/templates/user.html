@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{%block header %}
+<h1> Инфа о сотруднике </h1>
+{% endblock %}
+
+{% block content %}
+
+{% include 'employee.html' %}
+<p></p>
+<p></p>
+<table>
+    <caption>Время сотрудника</caption>
+    <tr>
+        <th>Время</th>
+        <th>Событие</th>
+    </tr>
+    {% for time_record in timelist %}
+    <tr>
+        <td>{{ time_record.person_time.strftime("%m/%d/%Y, %H:%M:%S") }}</td>
+        {% if time_record.is_exit %}
+            <td>Ушел</td>
+        {% else %}
+            <td>Пришел</td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+
+</table>
+
+{% endblock %}

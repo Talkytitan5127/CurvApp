@@ -24,7 +24,8 @@ def create_user():
     cursor = Cursor()
     user = cursor.create_user(data)
     user_uuid = user.uuid
-    cursor.close()
+    cursor.commit([user])
+    
     return make_response({"status": "created", "uuid": user_uuid}, 201)
 
 
@@ -32,11 +33,21 @@ def create_user():
 def get_user(u_id):
     cursor = Cursor()
     user = cursor.get_user(u_id)
-    cursor.close()
+
     if user is None:
         return make_response(jsonify({'error': 'not found'}), 404)
 
+    #work time
+    is_exit = False
+    timelist = cursor.get_user_time(user)
+    if len(timelist) % 2:
+        is_exit = True
+
+    record = cursor.create_time(user, is_exit)
+    cursor.commit([record])
+
     return make_response(jsonify({
         'first_name': user.first_name,
-        'last_name': user.last_name
+        'last_name': user.last_name,
+        'is_exit': is_exit
     }), 200)

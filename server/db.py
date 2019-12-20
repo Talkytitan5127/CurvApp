@@ -26,14 +26,27 @@ class Cursor:
             uuid=u_id
         )
 
-        self.commit([user])
-
         return user
 
-    def get_user(self, u_id):
-        user = self.session.query(Employee).filter_by(uuid=u_id).first()
+    def get_user(self, u_id, db_id=None):
+        if db_id is not None:
+            user = self.session.query(Employee).get(db_id)
+        else:
+            user = self.session.query(Employee).filter_by(uuid=u_id).first()
         return user
 
     def get_all_users(self):
         users = self.session.query(Employee).all()
         return users
+
+    def get_user_time(self, user):
+        timelist = self.session.query(TimeTable).filter_by(employee_id=user.id).all()
+        return timelist
+
+    def create_time(self, user, is_exit):
+        record = TimeTable(
+            is_exit=is_exit,
+            employee_id=user.id
+        )
+
+        return record

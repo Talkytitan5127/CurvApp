@@ -1,24 +1,44 @@
+<table>
 <div class="name" id="first_name">
-    <div>
-        Имя:
-    </div>
-    <div>
-        {{ user.first_name }}
-    </div>
+    <tr>
+        <td>
+            Имя:
+        </td>
+        <td>
+            {{ user.first_name }}
+        </td>
+    </tr>
 </div>
 <div class="name" id="last_name">
-    <div>
-        Фамилия:
-    </div>
-    <div>
-        {{ user.last_name }}
-    </div>
+    <tr>
+        <td>
+            Фамилия:
+        </td>
+        <td>
+            {{ user.last_name }}
+        </td>
+    </tr>
 </div>
+{% if user.middle_name %}
+    <div class="name" id="middle_name">
+        <tr>
+            <td>
+                Отчество:
+            </td>
+            <td>
+                {{ user.middle_name }}
+            </td>
+        </tr>
+    </div>
+{% endif %}
 <div class="name" id="uuid">
-    <div>
-        Unique Key:
-    </div>
-    <div>
-        {{ user.uuid }}
-    </div>
+    <tr>
+        <td>
+            Unique Key:
+        </td>
+        <td>
+            {{ user.uuid }}
+        </td>
+    </tr>
 </div>
+<table>
