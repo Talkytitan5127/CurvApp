@@ -51,3 +51,27 @@ def get_user(u_id):
         'last_name': user.last_name,
         'is_exit': is_exit
     }), 200)
+
+
+@api.route('/user/<int:primary_id>', methods=['GET'])
+def get_user_by_id(primary_id):
+    cursor = Cursor()
+    user = cursor.get_user(None, db_id=primary_id)
+
+    if user is None:
+        return make_response(jsonify({'error': 'not found'}), 404)
+
+    #work time
+    is_exit = False
+    timelist = cursor.get_user_time(user)
+    if len(timelist) % 2:
+        is_exit = True
+
+    record = cursor.create_time(user, is_exit)
+    cursor.commit([record])
+
+    return make_response(jsonify({
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+        'is_exit': is_exit
+    }), 200)
