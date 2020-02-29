@@ -1,10 +1,11 @@
 import socket
 import requests
 import json
+import os
 
+HOST = os.getenv('UDP_HOST', default='127.0.0.1')
+PORT = os.getenv('UDP_PORT', default=10001)
 
-HOST = '127.0.0.1'
-PORT = 10001
 
 with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as socket:
     socket.bind((HOST, PORT))
