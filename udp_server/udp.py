@@ -19,14 +19,16 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as socket:
         if not data:
             continue
 
+        # 17:16:27;07-03-20;1
         data = data.decode()
         print('Server accept: ', data)
+        time_str, date_str, user_id = data.split(';')
         
         if data == 'echo':
             socket.sendto('server echo'.encode(), addr)
-        url = 'http://127.0.0.1:5000/api/user/{}'.format(data)
+        url = 'http://127.0.0.1:5000/api/user/{}'.format(user_id)
         print(url)
-        resp = requests.get(url)
+        resp = requests.get(url, params={'time': time_str, 'date': date_str})
         print(resp)
         print(resp.text)
         if resp.status_code == 200:

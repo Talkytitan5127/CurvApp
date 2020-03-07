@@ -1,31 +1,48 @@
 {% extends 'base.html' %}
 
-{%block header %}
-<h1> Инфа о сотруднике </h1>
-{% endblock %}
-
 {% block content %}
 
+<h1>Информация о сотруднике</h1>
 {% include 'employee.html' %}
 <p></p>
 <p></p>
-<table>
-    <caption>Время сотрудника</caption>
-    <tr>
-        <th>Время</th>
-        <th>Событие</th>
-    </tr>
-    {% for time_record in timelist %}
-    <tr>
-        <td>{{ time_record.person_time.strftime("%m/%d/%Y, %H:%M:%S") }}</td>
-        {% if time_record.is_exit %}
-            <td>Ушел</td>
-        {% else %}
-            <td>Пришел</td>
-        {% endif %}
-    </tr>
-    {% endfor %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <h5>Сотрудник</h5>
+        </div>
+        <div class="col-sm-3">
+            <h5>Статус</h5>
+        </div>
+        <div class="col-sm-3">
+            <h5>Время</h5>
+        </div>
+    </div>
+    <div class="list-group">
+        {% for time_record in timelist %}
+        <div class=list-group-item>
+            <div class="row">
+                <div class="col-sm-6">
+                    Сотрудник {{ '{} {}'.format(user.first_name, user.last_name) }}
+                </div>
+                <div class="col-sm-3">
+                    {% if time_record.is_exit %}
+                        <p>Уход</p>
+                    {% else %}
+                        <p>Приход</p>
+                    {% endif %}
+                </div>
+                <div class="col-sm-3">
+                    {{ time_record.person_time.strftime('%m/%d/%Y, %H:%M:%S') }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 
-</table>
+<h1>Статистика за неделю</h1>
+<div class="container">
 
+</div>
 {% endblock %}

@@ -1,44 +1,50 @@
-<table>
-<div class="name" id="first_name">
-    <tr>
-        <td>
-            Имя:
-        </td>
-        <td>
-            {{ user.first_name }}
-        </td>
-    </tr>
+<div class="name row" id="first_name">
+    <div class="col-sm-2">
+        <p>Имя</p>
+    </div>
+    <div class="col-sm-8">
+        <p>{{ user.first_name }}</p>
+    </div>
 </div>
-<div class="name" id="last_name">
-    <tr>
-        <td>
-            Фамилия:
-        </td>
-        <td>
-            {{ user.last_name }}
-        </td>
-    </tr>
+<div class="name row" id="last_name">
+    <div class="col-sm-2">
+        <p>Фамилия</p>
+    </div>
+    <div class="col-sm-8">
+        <p>{{ user.last_name }}</p>
+    </div>
 </div>
 {% if user.middle_name %}
-    <div class="name" id="middle_name">
-        <tr>
-            <td>
-                Отчество:
-            </td>
-            <td>
-                {{ user.middle_name }}
-            </td>
-        </tr>
+<div class="row" id="middle_name">
+    <div class="name col-sm-2">
+        <p>Отчество</p>
     </div>
-{% endif %}
-<div class="name" id="uuid">
-    <tr>
-        <td>
-            Unique Key:
-        </td>
-        <td>
-            {{ user.uuid }}
-        </td>
-    </tr>
+    <div class="col-sm-8">
+        <p>{{ user.middle_name }}</p>
+    </div>
 </div>
-<table>
+{% endif %}
+<div class="row" id="uuid">
+    <div class="name col-sm-2">
+        <p>Unique key</p>
+    </div>
+    <div class="col-sm-8">
+        <p>{{ user.uuid }}</p>
+    </div>
+</div>
+<div class="row" id="rank">
+    <div class="name col-sm-2">
+        <p>Rank</p>
+    </div>
+    <div class="name col-sm-8">
+        <p>{{ user.rank }}</p>
+    </div>
+</div>
+<div class="row" id="department">
+    <div class="name col-sm-2">
+        <p>Department</p>
+    </div>
+    <div class="name col-sm-8">
+        <p>{{ user.department }}</p>
+    </div>
+</div>

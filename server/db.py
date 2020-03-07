@@ -23,7 +23,9 @@ class Cursor:
             first_name=data['first_name'],
             last_name=data['last_name'],
             middle_name=middle_name,
-            uuid=u_id
+            uuid=u_id,
+            rank=data.get('rank', None),
+            department=data.get('department', None),
         )
 
         return user
@@ -43,10 +45,11 @@ class Cursor:
         timelist = self.session.query(TimeTable).filter_by(employee_id=user.id).all()
         return timelist
 
-    def create_time(self, user, is_exit):
+    def create_time(self, user, is_exit, time_str=None):
         record = TimeTable(
             is_exit=is_exit,
-            employee_id=user.id
+            employee_id=user.id,
+            person_time=time_str,
         )
 
         return record

@@ -1,25 +1,12 @@
 {% extends 'base.html' %}
 
-{% block header %}
-<div class="container">
-    <a href="/admin" class="logo">LOGO</a>
-    <nav>
-      <ul>
-        <li><a href="">Главная</a></li>
-        <li><a href="">О нас</a></li>
-        <li><a href="">Контакты</a></li>
-      </ul>
-    </nav>
-  </div>
-{% endblock %}
-
 {% block content %}
 
 <h1>Список работников</h1>
 {% if users %}
-<ul>
+<ul class="list-group">
     {% for user in users %}
-        <li>
+        <li class="list-group-item">
             {% include 'employee.html' %}
         </li>
     {% endfor %}
