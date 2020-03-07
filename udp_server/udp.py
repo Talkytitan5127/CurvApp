@@ -35,7 +35,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as socket:
             resp_data = json.loads(resp.text)
             timedate = resp_data['time']
             print('Answer from tcp server: ', resp_data)
-            fio = '{};{} {}'.format(timedate, ['first_name'], resp_data['last_name'])
+            fio = '{};{} {}'.format(timedate, resp_data['first_name'], resp_data['last_name'])
             socket.sendto(fio.encode(), addr)
         elif resp.status_code == 404:
             socket.sendto('not_found'.encode(), addr)
