@@ -82,7 +82,8 @@ def get_user_by_id(primary_id):
     return make_response(jsonify({
         'first_name': user.first_name,
         'last_name': user.last_name,
-        'is_exit': is_exit
+        'is_exit': is_exit,
+        'time': data['time'],
     }), 200)
 
 @api.route('/user/<int:user_id>/statistic', methods=['GET'])
